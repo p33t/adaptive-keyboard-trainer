@@ -8,6 +8,8 @@ export type IncubateAction = ActionType<typeof incubate>;
 
 export type IncubateState = Readonly<{
     keystrokeHistory: KeystrokeAt[];
+    // difficulty: number;
+    // keyboardProfile: ;
 }>;
 
 export default combineReducers<IncubateState, IncubateAction>({

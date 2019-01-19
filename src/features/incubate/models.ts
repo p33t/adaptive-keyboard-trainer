@@ -10,3 +10,10 @@ export type KeystrokeAt = {
   alt: boolean;
   at: number;
 };
+
+export type RatedKeystroke = {
+  char: string;
+  ctl: boolean;
+  alt: boolean;
+  rating: number;
+}
