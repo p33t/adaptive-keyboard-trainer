@@ -1,7 +1,10 @@
 /**
+ * Returns an index into the given weights based on the random number given.
+ * The higher the weighting, the more likely it well be chosen.
  *
- * @param weights
- * @param random
+ * @param weights 0 or positive numbers indicating the likelihood of being chosen (relative to other weights)
+ * @param random A random number where 0 <= random < 1
+ * @returns An index into the given weights array
  */
 export default function weightedRandom(weights: number[], random: number) {
     const maxIndex = weights.length - 1;
