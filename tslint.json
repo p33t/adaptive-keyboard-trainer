@@ -1,6 +1,8 @@
 {
   "extends": ["tslint:recommended", "tslint-react"],
   "rules": {
+    "curly": [true, "ignore-same-line"],
+    "eofline": false,
     "arrow-parens": false,
     "arrow-return-shorthand": [false],
     "comment-format": [true, "check-space"],
@@ -22,7 +24,6 @@
     "no-submodule-imports": [true, "@src", "rxjs"],
     "no-this-assignment": [true, { "allow-destructuring": true }],
     "no-trailing-whitespace": true,
-    "no-unused-variable": [true, "react"],
     "object-literal-sort-keys": false,
     "object-literal-shorthand": false,
     "one-variable-per-declaration": [false],
