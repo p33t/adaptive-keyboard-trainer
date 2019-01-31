@@ -27,8 +27,8 @@ describe("WeightedRandom tests", () => {
             check(1, 1, 1, 1);
             check(2, 1, 1, 3);
             check(0, 3, 1, 1);
-            check(1, 1, 1)
-            check(1, 2, 1, 1)
+            check(1, 1, 1);
+            check(1, 2, 1, 1);
         });
 
         it ("should error if illegal random", () => {
