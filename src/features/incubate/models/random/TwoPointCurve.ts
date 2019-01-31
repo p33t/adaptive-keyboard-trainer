@@ -1,9 +1,12 @@
-import {ICurve} from "./ICurve";
+import {Curve} from './Curve';
 
 /**
  * A point on a 2D plane.
  */
-export type Point = { x: number, y: number };
+export type Point = {
+    x: number;
+    y: number;
+};
 
 /**
  * Yields simple curve with linear interpolation.
@@ -11,7 +14,7 @@ export type Point = { x: number, y: number };
  * __/
  * p1
  */
-export function TwoPointCurve(p1: Point, p2: Point): ICurve {
+export function TwoPointCurve(p1: Point, p2: Point): Curve {
     const ratio = p1.x === p2.x
         ? NaN
         : (p2.y - p1.y) / (p2.x - p1.x);

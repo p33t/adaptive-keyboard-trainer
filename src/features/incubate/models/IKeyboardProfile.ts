@@ -1,4 +1,4 @@
-import {RatedKeystroke} from "../models";
+import {RatedKeystroke} from '../models';
 
 export interface IKeyboardProfile {
     name: string;

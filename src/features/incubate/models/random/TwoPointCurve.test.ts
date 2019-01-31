@@ -1,16 +1,16 @@
-import * as assert from "assert";
-import {TwoPointCurve} from "./TwoPointCurve";
+import * as assert from 'assert';
+import {TwoPointCurve} from './TwoPointCurve';
 
-describe("TwoPointCurve tests", () => {
-    describe("Given an upward TwoPointCurve", () => {
+describe('TwoPointCurve tests', () => {
+    describe('Given an upward TwoPointCurve', () => {
         const subject = TwoPointCurve({x: .1, y: .1}, {x: .3, y: .3});
 
         function check(x: number, expY: number) {
             assert.strictEqual(subject(x), expY);
         }
 
-        describe("when I evaluate x", () => {
-            it("should return an appropriate y", () => {
+        describe('when I evaluate x', () => {
+            it('should return an appropriate y', () => {
                 check(0, .1);
                 check(.1, .1);
                 check(.3, .3);
@@ -21,15 +21,15 @@ describe("TwoPointCurve tests", () => {
             });
         });
     });
-    describe("Given an downward TwoPointCurve", () => {
+    describe('Given an downward TwoPointCurve', () => {
         const subject = TwoPointCurve({x: .1, y: .3}, {x: .3, y: .1});
 
         function check(x: number, expY: number) {
             assert.strictEqual(subject(x), expY);
         }
 
-        describe("when I evaluate x", () => {
-            it("should return an appropriate y", () => {
+        describe('when I evaluate x', () => {
+            it('should return an appropriate y', () => {
                 check(0, .3);
                 check(.1, .3);
                 check(.3, .1);
@@ -41,15 +41,15 @@ describe("TwoPointCurve tests", () => {
         });
     });
 
-    describe("Given a step down TwoPointCurve", () => {
+    describe('Given a step down TwoPointCurve', () => {
         const subject = TwoPointCurve({x: .1, y: .3}, {x: .1, y: .1});
 
         function check(x: number, expY: number) {
             assert.strictEqual(subject(x), expY);
         }
 
-        describe("when I evaluate x", () => {
-            it("should return an appropriate y", () => {
+        describe('when I evaluate x', () => {
+            it('should return an appropriate y', () => {
                 check(0, .3);
                 check(.1, .3);
                 check(.100000000001, .1);

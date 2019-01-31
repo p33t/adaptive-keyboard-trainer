@@ -23,11 +23,11 @@ export default function weightedRandom(weights: number[], random: number) {
 
 export function accumWeights(weights: number[]): number[] {
     const length = weights.length;
-    if (length === 0) throw new Error("Weights cannot be empty");
+    if (length === 0) throw new Error('Weights cannot be empty');
     const result = [weights[0]];
     for (let i = 1; i < length; i++) {
         const prev = result[i - 1];
-        let weight = weights[i];
+        const weight = weights[i];
         if (weight < 0) throw new Error(`Found negative weight ${weight} at index ${i}`);
         result[i] = prev + weight;
     }

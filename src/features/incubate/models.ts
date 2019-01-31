@@ -16,4 +16,4 @@ export type RatedKeystroke = {
   ctl: boolean;
   alt: boolean;
   rating: number;
-}
+};

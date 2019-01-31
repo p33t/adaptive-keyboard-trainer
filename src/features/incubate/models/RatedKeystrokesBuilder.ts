@@ -1,4 +1,4 @@
-import {Keystroke, RatedKeystroke} from "../models";
+import {Keystroke, RatedKeystroke} from '../models';
 
 export class RatedKeystrokesBuilder {
     arr: RatedKeystroke[] = [];
@@ -13,7 +13,7 @@ export class RatedKeystrokesBuilder {
                 char,
                 ctl: false,
                 alt: false,
-                rating
+                rating,
             };
             this.arr.push(rks);
         }
