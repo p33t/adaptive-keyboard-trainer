@@ -2,9 +2,12 @@ import {RatedKeystrokesBuilder} from "./RatedKeystrokesBuilder";
 import * as assert from "assert";
 import {RatedKeystroke} from "../models";
 
-describe("Here are my tests", () => {
-    it("should not fail", () => {
-        const subject = new RatedKeystrokesBuilder();
+describe("Given a RatedKeystrokesBuilder", () => {
+    let subject: RatedKeystrokesBuilder;
+    beforeEach(() => {
+        subject = new RatedKeystrokesBuilder();
+    });
+    it("should accept unique keystrokes", () => {
         subject.add("abc", 10);
         const exp: RatedKeystroke[] = [
             {
@@ -27,5 +30,8 @@ describe("Here are my tests", () => {
             },
         ];
         assert.deepStrictEqual(subject.getArr(), exp);
+    });
+    it("should barf when same keystroke is supplied in the same call", () => {
+        assert.throws(() => subject.add("aba", 10), /Repeated keystroke 'a'/);
     });
 });

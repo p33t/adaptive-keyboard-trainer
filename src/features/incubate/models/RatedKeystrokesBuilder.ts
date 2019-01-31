@@ -6,6 +6,9 @@ export class RatedKeystrokesBuilder {
 
     public add(chars: string, rating: number) {
         for (const char of chars) {
+            const found = this.arr.find(elem => elem.char === char);
+            if (found) throw Error(`Repeated keystroke '${char}'`);
+
             const rks: RatedKeystroke = {
                 char,
                 ctl: false,
