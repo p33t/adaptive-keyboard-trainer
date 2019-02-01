@@ -8,7 +8,6 @@ import {RootState} from '../../../store';
 
 interface IProps {
     keystroked: (keystrokeAt: KeystrokeAt) => any;
-    keystrokeHistory: KeystrokeAt[];
     keystrokeQueue: Keystroke[];
     updateQueue: (queue: Keystroke[]) => any;
 }
@@ -19,6 +18,7 @@ const ctl = false;
 function KeystrokeInput(props: IProps) {
 
     const keyPressed: KeyboardEventHandler<HTMLInputElement> = (evt) => {
+        evt.preventDefault();
         props.keystroked({char: evt.key, at: 10, alt: false, ctl: false});
         const need = 10 - props.keystrokeQueue.length;
         if (need > 0) {
@@ -31,17 +31,10 @@ function KeystrokeInput(props: IProps) {
         }
     };
 
-    const soFar = props.keystrokeHistory.map(keystrokeAt => keystrokeAt.char).join('');
-
-    return (
-        <React.Fragment>
-            {soFar} <Input onKeyPress={keyPressed}/>
-        </React.Fragment>
-    );
+    return <Input onKeyPress={keyPressed}/>;
 }
 
 const mapStateToProps = (state: RootState) => ({
-    keystrokeHistory: state.incubate.keystrokeHistory,
     keystrokeQueue: state.incubate.keystrokeQueue,
 });
 
