@@ -4,7 +4,7 @@ export class RatedKeystrokesBuilder {
     arr: RatedKeystroke[] = [];
     unique: Set<Keystroke> = new Set();
 
-    public add(chars: string, rating: number) {
+    public add(chars: string, rating: number): RatedKeystrokesBuilder {
         for (const char of chars) {
             const found = this.arr.find(elem => elem.char === char);
             if (found) throw Error(`Repeated keystroke '${char}'`);
@@ -17,6 +17,7 @@ export class RatedKeystrokesBuilder {
             };
             this.arr.push(rks);
         }
+        return this;
     }
 
     public getArr() {
