@@ -5,7 +5,7 @@ import {Col, Row} from 'antd';
 import KeystrokeFeedback from "./features/incubate/components/KeystrokeFeedback";
 import {IKeyboardProfile} from "./features/incubate/models/IKeyboardProfile";
 import {QwertyProfile} from "./features/incubate/models/QwertyProfile";
-import {Dispatch} from "redux";
+import {bindActionCreators, Dispatch} from "redux";
 import {initialiseApp} from "./features/incubate/actions";
 import {connect} from "react-redux";
 import {RootState} from "./store";
@@ -62,10 +62,9 @@ const mapStateToProps = (state: RootState): IMapStateToProps => ({
     keyboardProfile: state.incubate.keyboardProfile || {},
 });
 
-// TODO: Find the shorthand way to do this
-const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => ({
-    initialiseApp: (p: IKeyboardProfile) => dispatch(initialiseApp(p)),
-});
+const mapDispatchToProps = (dispatch: Dispatch): IMapDispatchToProps => (bindActionCreators({
+    initialiseApp,
+}, dispatch));
 
 export default connect<IMapStateToProps, IMapDispatchToProps, {}, RootState>(
     mapStateToProps,
