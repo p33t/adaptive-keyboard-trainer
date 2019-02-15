@@ -1,9 +1,9 @@
-import {combineReducers} from 'redux';
 import {ActionType, getType} from 'typesafe-actions';
 
 import {alt, ctl, Keystroke, KeystrokeAt} from './models';
 import * as incubate from './actions';
 import {IKeyboardProfile} from "./models/IKeyboardProfile";
+import {IncubateAction, IncubateState} from "./index";
 
 export type IncubateAction = ActionType<typeof incubate>;
 
@@ -20,34 +20,26 @@ const defaultProfile: IKeyboardProfile = {
   name: "Non-Keyboard",
 };
 
-export default combineReducers<IncubateState, IncubateAction>({
-  keystrokeHistory: (state = [], action) => {
+const defaultState: IncubateState = {
+  keystrokeHistory: [],
+  keystrokeQueue: [],
+  keyboardProfile: defaultProfile,
+  randomSource: Math.random,
+};
+
+export default function reduce(state: IncubateState = defaultState, action: IncubateAction): IncubateState {
     switch (action.type) {
       case getType(incubate.keystroked):
-        return [...state, action.payload];
-      default:
-        return state;
-    }
-  },
-  keystrokeQueue: (state = [], action) => {
-    switch (action.type) {
+        const keystrokeHistory = [...state.keystrokeHistory, action.payload];
+        return {...state, keystrokeHistory};
       case getType(incubate.updateQueue):
-        return action.payload;
+        return {...state, keystrokeQueue: action.payload};
       case getType(incubate.initialiseApp):
-        return [{char: 'a', alt, ctl}, {char: 'b', alt, ctl}];
+        return {...state,
+          keystrokeQueue: [{char: 'a', alt, ctl}, {char: 'b', alt, ctl}],
+          keyboardProfile: action.payload,
+        };
       default:
         return state;
     }
-  },
-  keyboardProfile: (state = defaultProfile, action) => {
-    switch (action.type) {
-      case getType(incubate.initialiseApp):
-        return action.payload;
-      default:
-        return state;
-    }
-  },
-  randomSource: (state = Math.random) => {
-      return state;
-  },
-});
+}
