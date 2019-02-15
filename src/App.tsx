@@ -20,9 +20,7 @@ interface IMapStateToProps {
     keyboardProfile: IKeyboardProfile;
 }
 
-type AppProps = IMapDispatchToProps & IMapStateToProps;
-
-class App extends React.Component<AppProps> {
+class App extends React.Component<IMapDispatchToProps & IMapStateToProps> {
 
     componentDidMount(): void {
         this.props.initialiseApp(new QwertyProfile());
