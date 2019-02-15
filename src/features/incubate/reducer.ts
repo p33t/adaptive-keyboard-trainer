@@ -12,6 +12,7 @@ export type IncubateState = Readonly<{
   keystrokeQueue: Keystroke[];
   // difficulty: number;
   keyboardProfile: IKeyboardProfile;
+  randomSource: () => number;
 }>;
 
 const defaultProfile: IKeyboardProfile = {
@@ -45,5 +46,8 @@ export default combineReducers<IncubateState, IncubateAction>({
       default:
         return state;
     }
+  },
+  randomSource: (state = Math.random) => {
+      return state;
   },
 });

@@ -5,17 +5,22 @@ import {keystroked, updateQueue} from '../actions';
 import {Keystroke, KeystrokeAt} from '../models';
 import {KeyboardEventHandler} from 'react';
 import {RootState} from '../../../store';
+import {bindActionCreators, Dispatch} from "redux";
 
-interface IProps {
+interface IActions {
     keystroked: (keystrokeAt: KeystrokeAt) => any;
-    keystrokeQueue: Keystroke[];
     updateQueue: (queue: Keystroke[]) => any;
+}
+
+interface IState {
+    keystrokeQueue: Keystroke[];
+    randomSource: () => number;
 }
 
 const alt = false;
 const ctl = false;
 
-function KeystrokeInput(props: IProps) {
+function KeystrokeInput(props: IActions & IState) {
 
     const keyPressed: KeyboardEventHandler<HTMLInputElement> = (evt) => {
         evt.preventDefault();
@@ -24,7 +29,7 @@ function KeystrokeInput(props: IProps) {
         if (need > 0) {
             const queue = [...props.keystrokeQueue];
             for (let i = 0 ; i < need; i++) {
-                const char = 'abcdefghijklmnopqrstuvwxyz'.charAt(Math.random() * 26);
+                const char = 'abcdefghijklmnopqrstuvwxyz'.charAt(props.randomSource() * 26);
                 queue.push({char, alt, ctl});
             }
             props.updateQueue(queue);
@@ -34,11 +39,14 @@ function KeystrokeInput(props: IProps) {
     return <Input onKeyPress={keyPressed}/>;
 }
 
-const mapStateToProps = (state: RootState) => ({
+const mapStateToProps = (state: RootState): IState => ({
     keystrokeQueue: state.incubate.keystrokeQueue,
+    randomSource: state.incubate.randomSource,
 });
 
-export default connect(mapStateToProps, {
+const mapDispatchToProps = (dispatch: Dispatch): IActions => (bindActionCreators({
     keystroked,
     updateQueue,
-})(KeystrokeInput);
+}, dispatch));
+
+export default connect(mapStateToProps, mapDispatchToProps)(KeystrokeInput);
